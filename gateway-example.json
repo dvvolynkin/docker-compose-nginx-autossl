@@ -1,0 +1,23 @@
+{
+    "subdomains": [
+        {
+            "name": "",
+            "locations": {
+                "/second_frontend/": "second-frontend:8080",
+                "/": "frontend:8080"
+            }
+        },
+        {
+            "name": "api",
+            "locations": {
+                "/": "backend:8081"
+            }
+        },
+        {
+            "name": "_",
+            "locations": {
+                "/": "frontend:8080"
+            }
+        }
+    ]
+}

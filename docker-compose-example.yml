@@ -1,0 +1,32 @@
+version: '3.8'
+#
+# With gateway.json it makes services available on next urls:
+# https://api.staging.example.com — backend:8081
+# https://staging.example.com/second_frontend/ — second-frontend:8080
+# https://staging.example.com/ — frontend:8080
+services:
+  second-frontend:
+    image: second-frontend:latest
+
+  backend:
+    image: backend:latest
+
+  frontend:
+    image: backend:latest
+
+  gateway:
+    image: dvvolynkin/docker-compose-nginx-autossl
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/data/ssl:/etc/resty-auto-ssl
+      - ./gateway-example.json:/gateway.json
+    environment:
+      ALLOWED_DOMAINS: "([a-z]+.)?staging.example.com"
+      MAIN_DOMAIN: "staging.example.com"
+    depends_on:
+      - backend
+      - frontend
+
