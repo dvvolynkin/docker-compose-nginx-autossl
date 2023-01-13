@@ -19,6 +19,6 @@ It makes services in docker-compose be available on next urls:
 - https://staging.example.com/ — frontend:8080
 
 ## Additional info
-This repository based on https://github.com/Valian/docker-nginx-auto-ssl/
+This repository based on https://github.com/Valian/docker-nginx-auto-ssl/  
 So you can use its documentation as additional information for use cases.
 
