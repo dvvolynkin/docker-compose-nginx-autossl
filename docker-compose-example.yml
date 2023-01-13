@@ -15,7 +15,7 @@ services:
     image: backend:latest
 
   gateway:
-    image: dvvolynkin/docker-compose-nginx-autossl
+    image: foxez/docker-compose-nginx-autossl
     restart: on-failure
     ports:
       - 80:80
