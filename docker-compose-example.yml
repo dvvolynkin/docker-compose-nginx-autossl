@@ -20,6 +20,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      # - 8080:8080 # Should be protected by firewall first
     volumes:
       - /var/data/ssl:/etc/resty-auto-ssl
       - ./gateway-example.json:/gateway.json
