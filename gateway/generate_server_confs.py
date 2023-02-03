@@ -14,6 +14,9 @@ if __name__ == '__main__':
     with open(f"{RESTY_CONF_DIR}/server-proxy.conf", "r") as template_file:
         server_proxy_template = template_file.read()
 
+    with open(f"{RESTY_CONF_DIR}/server-proxy-www-redirect.conf", "r") as template_file:
+        server_proxy_redirect_www_template = template_file.read()
+
     # Читаем шаблон server-proxy-location.conf
     with open(f"{RESTY_CONF_DIR}/server-proxy-location.conf", "r") as template_file:
         server_proxy_location_template = template_file.read()
@@ -38,10 +41,14 @@ if __name__ == '__main__':
 
         # Заполняем шаблон server-proxy.conf соответствующими значениями
         server_proxy_str = server_proxy_template.replace("$SERVER_NAME", server_name).replace("$LOCATIONS", locations_str)
+        server_proxy_redirect_www_str = server_proxy_redirect_www_template.replace("$SERVER_NAME", server_name)
 
         # Записываем результат в файл ${NGINX_CONF_DIR}/{server_name}.conf
         with open(f"{NGINX_CONF_DIR}/{server_name}.conf", "w") as out_file:
             out_file.write(server_proxy_str)
+
+        with open(f"{NGINX_CONF_DIR}/www.{server_name}.conf", "w") as out_file:
+            out_file.write(server_proxy_redirect_www_str)
 
     with open(f'{RESTY_CONF_DIR}/stubs-server.conf', 'r') as template_file:
         template = template_file.read()
